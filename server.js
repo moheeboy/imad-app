@@ -127,6 +127,24 @@ app.get('/hash/:input', function (req, res){
    res.send(hashedString);
 });
 
+app.get('/createUser', function(req,res){
+    var username = "mohitnik96";
+    var password = "Mohit!1966";
+    var salt = "This-is-again-a-random-string";
+    var hashedPassword = hash(password, salt);
+    pool.query("INSERT INTO dbuser(username, password) VALUES($1,$2)", [username, hashedPassword], function(err, result){
+        if(err){
+            res.status(500).send(err.toString());
+       }else{
+           if(result.rows.length === 0 ){
+               res.status(404).send('Article not found!');
+           }else{
+               var articleData = result.rows[0];
+               res.send("User Sucessfully Created");
+           }
+       }
+    });
+});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
