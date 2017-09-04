@@ -1,7 +1,7 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-var xyz = require('pg').Pool;
+var Pool = require('pg').Pool;
 var app = express();
 var config={
     host: "db.imad.hasura-app.io",
@@ -14,9 +14,9 @@ var config={
 }
 app.use(morgan('combined'));
 
-var pool = new xyz(config);
+var pool = new Pool(config);
 app.get('/test-db', function (req, res){
-    pool.query("SELCET * FROM test", function (eff, result){
+    pool.query("SELCET * FROM test", function (err, result){
         if(err){
             res.status(500).send(err.toString());
         }else{
