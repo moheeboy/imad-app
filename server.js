@@ -150,7 +150,7 @@ app.post('/verifyUser', function(req, res){
         res.status(500).send(err.toString());
     }else{
         if (res.rows.length === 0 ){
-          res.status(402).send("No such user found"); 
+          res.status(403).send("No such user found"); 
         }else{
            var hashedPassword = hash(password, salt);
            var dbPassword = result.rows[0].password;
