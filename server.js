@@ -76,7 +76,7 @@ app.get('/articles/articleOne', function (req, res){
     
 });
 
-app.get('/articles/articleOne', function (req, res){
+app.get('/articles/articleTwo', function (req, res){
     pool.query("SELECT * FROM dbArticle WHERE title = 'articleTwo'" , function(err, result){
        if(err){
             res.status(500).send(err.toString());
@@ -92,7 +92,7 @@ app.get('/articles/articleOne', function (req, res){
     
 });
 
-app.get('/articles/articleOne', function (req, res){
+app.get('/articles/articleThree', function (req, res){
     pool.query("SELECT * FROM dbArticle WHERE title = 'articleThree'" , function(err, result){
        if(err){
             res.status(500).send(err.toString());
