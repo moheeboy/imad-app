@@ -143,18 +143,26 @@ app.get('/createUser', function(req,res){
 
 app.get('/verifyUser', function(req, res){
     
-      pool.query("SELECT * dbuser where username = $1", [username], function(err, result){
-          if(err){
-            res.status(500).send(err.toString());
+    var username = "mohitnikumbh96";
+    var password = "Mohit!1966";
+    var salt = "This-is-again-a-random-string";
+     pool.query("SELECT * dbuser where username = $1", [username], function(err, result){
+      if(err){
+        res.status(500).send(err.toString());
+      }else{
+       if (res.rows.length === 0 ){
+          res.send("No such user found"); 
        }else{
-           if (res.rows.length === 0 ){
-              res.send("No such user found"); 
+           var hashedPassword = hash(password, salt);
+           var dbPassword = result.rows[0].password;
+           if(hashedPassword == dbPassword){
+               res.send("UN and Pass both matched!");
            }else{
-               res.send("User found sucessfully");
-           }
-           
+               res.send("Only username matched, no password!");
+                }
+            }   
        }
-      });
+   });
       
 });
 
