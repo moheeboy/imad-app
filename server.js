@@ -151,10 +151,10 @@ app.get('/verifyUser', function(req, res){
     }else{
         if (res.rows.length === 0 ){
           res.status(402).send("No such user found"); 
-       }else{
+        }else{
            var hashedPassword = hash(password, salt);
            var dbPassword = result.rows[0].password;
-           if(hashedPassword == dbPassword){
+           if(hashedPassword === dbPassword){
                res.send("UN and Pass both matched!");
            }else{
                res.send("Only username matched, no password!");
