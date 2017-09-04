@@ -141,7 +141,7 @@ app.get('/createUser', function(req,res){
     });
 });
 
-app.get('/verifyUser', function(req, res){
+app.post('/verifyUser', function(req, res){
     var username = req.params.un;
     var password = req.params.pass;
     var salt = "This-is-again-a-random-string";
