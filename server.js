@@ -142,16 +142,15 @@ app.get('/createUser', function(req,res){
 });
 
 app.get('/verifyUser', function(req, res){
-    
     var username = "mohitnikumbh96";
     var password = "Mohit!1966";
     var salt = "This-is-again-a-random-string";
     pool.query("SELECT * dbuser where username = $1", [username], function(err, result){
-      if(err){
+    if(err){
         res.status(500).send(err.toString());
-      }else{
-       if (res.rows.length === 0 ){
-          res.stauts(402).send("No such user found"); 
+    }else{
+        if (res.rows.length === 0 ){
+          res.status(402).send("No such user found"); 
        }else{
            var hashedPassword = hash(password, salt);
            var dbPassword = result.rows[0].password;
