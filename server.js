@@ -145,7 +145,7 @@ app.post('/verifyUser', function(req, res){
     var username = req.params.un;
     var password = req.params.pass;
     var salt = "This-is-again-a-random-string";
-    pool.query("SELECT * FROM 'dbuser' WHERE username = $1", [username], function(err, result){
+    pool.query("SELECT * FROM 'dbuser' WHERE username = " + username , function(err, result){
     if(err){
         res.status(500).send(err.toString());
     }else{
