@@ -25,6 +25,37 @@ app.get('/test-db', function (req, res){
     });
 });
 
+function createTemplate(data){
+    var title = data.title;
+    var date = data.date;
+    var heading = data.heading;
+    var content = data.content;
+    var htmlTemplate = `
+    <html>
+        <head>
+            <title>
+            ${title}
+            </title>
+        </haed>
+        <body>
+        <center>
+            <div id="heading">
+                <h2>    ${heading}  </h2>
+            <span id="date">
+                <h3><right>    ${date.toDateString}   </right></h3>
+            </span>
+            </div>
+            <div id="main">
+                <p> ${content}  </p>
+            </div>
+        <center>
+        </body>
+        
+    </html>
+    `
+    return htmlTemplate;
+    }
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
