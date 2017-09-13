@@ -142,6 +142,29 @@ app.get('/createUser', function(req,res){
     });
 });
 
+app.post('/verify', function(req, res){
+    var un = req.params.un;
+    var pass = req.params.pass;
+    var salt = "This-is-again-a-random-string";
+    pool.query("SELECT * FROM dbuser WHERE username = '" + un +"'" , function(err, result){
+        if(err){
+            res.status(500).send(err.toString());
+        }else{
+            if (res.rows.length === 0){
+                res.status(403).send("Login credentials not correct");
+            }else{
+                var hPass = hash(pass, salt);
+                var dbPass = result.rows[0].password;
+                if (hPass == dbPass){
+                    res.send("Login Sucessfull");
+                }else{
+                    res.send("Password not matching");
+                }
+            }
+        }
+    });
+});
+
 app.post('/verifyUser', function(req, res){
     var username = req.params.un;
     var passwor = req.params.pass;
