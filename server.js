@@ -15,10 +15,6 @@ var config={
    
 }
 app.use(morgan('combined'));
-app.use(session({
-    secret: "dsfsdfssssddsfdf";
-    cookie:   { maxAge: 1000 * 60 * 60 * 24 * 30 }   
-}));
 
 var pool = new Pool(config);
 app.get('/test-db', function (req, res){
