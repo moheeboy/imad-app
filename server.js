@@ -144,7 +144,7 @@ app.get('/createUser', function(req,res){
 
 app.post('/verifyUser', function(req, res){
     var username = req.params.un;
-    var password = req.params.pass;
+    var passwor = req.params.pass;
     var salt = "This-is-again-a-random-string";
     pool.query("SELECT * FROM dbuser WHERE username = '" + username +"'" , function(err, result){
     if(err){
@@ -153,7 +153,7 @@ app.post('/verifyUser', function(req, res){
         if (res.rows.length === 0 ){
           res.status(403).send("No such user found"); 
         }else{
-           var hashedPassword = hash(password, salt);
+           var hashedPassword = hash(passwor, salt);
            var dbPassword = result.rows[0].password;
            if(hashedPassword === dbPassword){
                res.send("UN and Pass both matched!");
